@@ -136,6 +136,11 @@ OSSL_STORE_CTX *OSSL_STORE_attach(BIO *bio, const char *scheme,
                                   OSSL_STORE_post_process_info_fn post_process,
                                   void *post_process_data);
 
+/*
+ * Adds an object info to the store.
+ * Returns 1 on success, 0 otherwise.
+ */
+int OSSL_STORE_add(OSSL_STORE_CTX *ctx, OSSL_STORE_INFO *info, const OSSL_PARAM params[]);
 /*-
  *  Extracting OpenSSL types from and creating new OSSL_STORE_INFOs
  *  ---------------------------------------------------------------
@@ -207,6 +212,9 @@ void OSSL_STORE_INFO_free(OSSL_STORE_INFO *info);
 # define OSSL_STORE_SEARCH_BY_ISSUER_SERIAL     2
 # define OSSL_STORE_SEARCH_BY_KEY_FINGERPRINT   3
 # define OSSL_STORE_SEARCH_BY_ALIAS             4
+# define OSSL_STORE_SEARCH_KEY_BY_ALIAS         5
+# define OSSL_STORE_SEARCH_PRV_KEY_BY_CERT      6
+# define OSSL_STORE_SEARCH_PRV_KEY_BY_PUB_KEY   7
 
 /* To check what search types the scheme handler supports */
 int OSSL_STORE_supports_search(OSSL_STORE_CTX *ctx, int search_type);
@@ -224,6 +232,9 @@ OSSL_STORE_SEARCH *OSSL_STORE_SEARCH_by_key_fingerprint(const EVP_MD *digest,
                                                         const unsigned char
                                                         *bytes, size_t len);
 OSSL_STORE_SEARCH *OSSL_STORE_SEARCH_by_alias(const char *alias);
+OSSL_STORE_SEARCH *OSSL_STORE_SEARCH_key_by_alias(const char *alias);
+OSSL_STORE_SEARCH *OSSL_STORE_SEARCH_prv_key(const X509 *cert);
+OSSL_STORE_SEARCH *OSSL_STORE_SEARCH_prv_key_by_pub_key(EVP_PKEY *pubkey);
 
 /* Search term destructor */
 void OSSL_STORE_SEARCH_free(OSSL_STORE_SEARCH *search);

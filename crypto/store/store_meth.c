@@ -219,6 +219,10 @@ static void *loader_from_algorithm(int scheme_id, const OSSL_ALGORITHM *algodef,
             if (loader->p_export_object == NULL)
                 loader->p_export_object = OSSL_FUNC_store_export_object(fns);
             break;
+        case OSSL_FUNC_STORE_ADD:
+            if (loader->p_add == NULL)
+                loader->p_add = OSSL_FUNC_store_add(fns);
+            break;
         }
     }
 

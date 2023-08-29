@@ -205,6 +205,7 @@ OSSL_CORE_MAKE_FUNC(void, cleanup_nonce, (const OSSL_CORE_HANDLE *handle,
 #define OSSL_FUNC_PROVIDER_GET0_DISPATCH       109
 #define OSSL_FUNC_PROVIDER_UP_REF              110
 #define OSSL_FUNC_PROVIDER_FREE                111
+#define OSSL_FUNC_PROVIDER_ID                  112
 
 OSSL_CORE_MAKE_FUNC(int, provider_register_child_cb,
                     (const OSSL_CORE_HANDLE *handle,
@@ -224,6 +225,8 @@ OSSL_CORE_MAKE_FUNC(int, provider_up_ref,
                     (const OSSL_CORE_HANDLE *prov, int activate))
 OSSL_CORE_MAKE_FUNC(int, provider_free,
                     (const OSSL_CORE_HANDLE *prov, int deactivate))
+OSSL_CORE_MAKE_FUNC(const char *, provider_id,
+                    (const OSSL_CORE_HANDLE *prov))
 
 /* Functions provided by the provider to the Core, reserved numbers 1024-1535 */
 # define OSSL_FUNC_PROVIDER_TEARDOWN           1024
@@ -248,6 +251,12 @@ OSSL_CORE_MAKE_FUNC(int, provider_get_capabilities, (void *provctx,
                     const char *capability, OSSL_CALLBACK *cb, void *arg))
 # define OSSL_FUNC_PROVIDER_SELF_TEST          1031
 OSSL_CORE_MAKE_FUNC(int, provider_self_test, (void *provctx))
+# define OSSL_FUNC_PROVIDER_SETTABLE_PARAMS    1032
+OSSL_CORE_MAKE_FUNC(const OSSL_PARAM *,
+                    provider_settable_params,(void *provctx))
+# define OSSL_FUNC_PROVIDER_SET_PARAMS         1033
+OSSL_CORE_MAKE_FUNC(int,provider_set_params,(void *provdata,
+                                             const OSSL_PARAM params[]))
 
 /* Operations */
 
@@ -936,6 +945,7 @@ OSSL_CORE_MAKE_FUNC(int, decoder_export_object,
 #define OSSL_FUNC_STORE_EOF                         6
 #define OSSL_FUNC_STORE_CLOSE                       7
 #define OSSL_FUNC_STORE_EXPORT_OBJECT               8
+#define OSSL_FUNC_STORE_ADD                         9
 OSSL_CORE_MAKE_FUNC(void *, store_open, (void *provctx, const char *uri))
 OSSL_CORE_MAKE_FUNC(void *, store_attach, (void *provctx, OSSL_CORE_BIO *in))
 OSSL_CORE_MAKE_FUNC(const OSSL_PARAM *, store_settable_ctx_params,
@@ -951,6 +961,8 @@ OSSL_CORE_MAKE_FUNC(int, store_close, (void *loaderctx))
 OSSL_CORE_MAKE_FUNC(int, store_export_object,
                     (void *loaderctx, const void *objref, size_t objref_sz,
                      OSSL_CALLBACK *export_cb, void *export_cbarg))
+OSSL_CORE_MAKE_FUNC(int, store_add, (void *loaderctx, OSSL_STORE_INFO *info,
+                    const OSSL_PARAM params[]))
 
 # ifdef __cplusplus
 }

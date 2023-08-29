@@ -169,6 +169,12 @@ decoder implementations.
 
 =item "input-type" (B<OSSL_STORE_PARAM_INPUT_TYPE) <utf8 string>
 
+=item "key-alias" (B<OSSL_STORE_PARAM_KEY_ALIAS>) <UTF8 string>
+=item "cert" (B<OSSL_STORE_PARAM_CERT>) <octet string>
+=item "pub-key" (B<OSSL_STORE_PARAM_PUB_KEY>) <octet string>
+=item "id" (B<OSSL_STORE_PARAM_ID>) <UTF8 string>
+
+
 Type of the input format as a hint to use when decoding the objects in the
 store.
 

@@ -64,7 +64,7 @@ static int test_builtin_provider(void)
 
     ret =
         TEST_ptr(prov =
-                 ossl_provider_new(NULL, name, PROVIDER_INIT_FUNCTION_NAME, 0))
+                 ossl_provider_new(NULL, NULL, name, PROVIDER_INIT_FUNCTION_NAME, 0))
         && test_provider(prov, expected_greeting1(name));
 
     EVP_set_default_properties(NULL, "");
@@ -79,7 +79,7 @@ static int test_loaded_provider(void)
     OSSL_PROVIDER *prov = NULL;
 
     return
-        TEST_ptr(prov = ossl_provider_new(NULL, name, NULL, 0))
+        TEST_ptr(prov = ossl_provider_new(NULL, NULL, name, NULL, 0))
         && test_provider(prov, expected_greeting1(name));
 }
 
@@ -93,7 +93,7 @@ static int test_configured_provider(void)
         "Hello OpenSSL, greetings from Test Provider";
 
     return
-        TEST_ptr(prov = ossl_provider_find(NULL, name, 0))
+        TEST_ptr(prov = ossl_provider_find(NULL, NULL, name, 0))
         && test_provider(prov, expected_greeting);
 }
 # endif

@@ -50,6 +50,8 @@ The name of a cipher to be used when generating the MAC.
 
 The name of an engine to be used for the specified cipher (if any).
 
+=item "alias" (B<OSSL_PKEY_PARAM_ALIAS>) <UTF8 string>
+
 =back
 
 =head2 Common MAC key generation parameters

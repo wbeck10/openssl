@@ -15,15 +15,15 @@
 #include "internal/provider.h"
 #include "provider_local.h"
 
-OSSL_PROVIDER *OSSL_PROVIDER_try_load(OSSL_LIB_CTX *libctx, const char *name,
-                                      int retain_fallbacks)
+OSSL_PROVIDER *OSSL_PROVIDER_try_load_ex(OSSL_LIB_CTX *libctx, const char *provid,
+                                      const char *libname, int retain_fallbacks)
 {
     OSSL_PROVIDER *prov = NULL, *actual;
     int isnew = 0;
 
     /* Find it or create it */
-    if ((prov = ossl_provider_find(libctx, name, 0)) == NULL) {
-        if ((prov = ossl_provider_new(libctx, name, NULL, 0)) == NULL)
+    if ((prov = ossl_provider_find(libctx,  provid, libname, 0)) == NULL) {
+        if ((prov = ossl_provider_new(libctx, provid, libname, NULL, 0)) == NULL)
             return NULL;
         isnew = 1;
     }
@@ -49,11 +49,23 @@ OSSL_PROVIDER *OSSL_PROVIDER_try_load(OSSL_LIB_CTX *libctx, const char *name,
     return actual;
 }
 
+OSSL_PROVIDER *OSSL_PROVIDER_try_load(OSSL_LIB_CTX *libctx, const char *name,
+                                      int retain_fallbacks)
+{
+    return OSSL_PROVIDER_try_load_ex(libctx, NULL, name, retain_fallbacks);
+}
 OSSL_PROVIDER *OSSL_PROVIDER_load(OSSL_LIB_CTX *libctx, const char *name)
 {
     /* Any attempt to load a provider disables auto-loading of defaults */
     if (ossl_provider_disable_fallback_loading(libctx))
         return OSSL_PROVIDER_try_load(libctx, name, 0);
+    return NULL;
+}
+OSSL_PROVIDER *OSSL_PROVIDER_multiple_load(OSSL_LIB_CTX *libctx, const char *provid, const char *name)
+{
+    /* Any attempt to load a provider disables auto-loading of defaults */
+    if (ossl_provider_disable_fallback_loading(libctx))
+        return OSSL_PROVIDER_try_load_ex(libctx, provid, name, 0);
     return NULL;
 }
 
@@ -73,6 +85,16 @@ const OSSL_PARAM *OSSL_PROVIDER_gettable_params(const OSSL_PROVIDER *prov)
 int OSSL_PROVIDER_get_params(const OSSL_PROVIDER *prov, OSSL_PARAM params[])
 {
     return ossl_provider_get_params(prov, params);
+}
+
+const OSSL_PARAM *OSSL_PROVIDER_settable_params(const OSSL_PROVIDER *prov)
+{
+    return ossl_provider_settable_params(prov);
+}
+
+int OSSL_PROVIDER_set_params(OSSL_PROVIDER *prov, const OSSL_PARAM params[])
+{
+    return ossl_provider_set_params(prov, params);
 }
 
 const OSSL_ALGORITHM *OSSL_PROVIDER_query_operation(const OSSL_PROVIDER *prov,

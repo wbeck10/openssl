@@ -437,6 +437,16 @@ different for any third party provider.
 This returns 0 if the provider has entered an error state, otherwise it returns
 1.
 
+=item "pkcs11-slot" (B<OSSL_PROV_PARAM_PKCS11_SLOT>) <unsigned integer>
+=item "pkcs11-token" (B<OSSL_PROV_PARAM_PKCS11_TOKEN>) <UTF8 string>
+=item "pkcs11-module" (B<OSSL_PROV_PARAM_PKCS11_MODULE>) <UTF8 string>
+=item "pkcs11-userpin" (B<OSSL_PROV_PARAM_PKCS11_USERPIN>) <UTF8 string>
+=item "pkcs11-digest" (B<OSSL_PROV_PARAM_PKCS11_ENABLE_DIGESTS>) <unsigned integer>
+=item "pkcs11-slotidx-info" (B<OSSL_PROV_PARAM_PKCS11_SLOTIDX_INFO>) <unsigned integer>
+=item "pkcs11-slot-val" (B<OSSL_PROV_PARAM_PKCS11_SLOT_INFO_VALUE>) <UTF8 ptr>
+=item "pkcs11-slot-id" (B<OSSL_PROV_PARAM_PKCS11_SLOT_INFO_ID>) <unsigned integer>
+
+
 =back
 
 provider_gettable_params() should return the above parameters.

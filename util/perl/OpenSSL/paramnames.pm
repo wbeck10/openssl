@@ -39,6 +39,16 @@ my %params = (
     'PROV_PARAM_SELF_TEST_TYPE' =>   "st-type", # utf8_string
     'PROV_PARAM_SELF_TEST_DESC' =>   "st-desc", # utf8_string
 
+# PKCS11 parameters
+    'PROV_PARAM_PKCS11_SLOT' =>            "pkcs11-slot",         # uint
+    'PROV_PARAM_PKCS11_TOKEN' =>           "pkcs11-token",        # utf8_string
+    'PROV_PARAM_PKCS11_MODULE' =>          "pkcs11-module",       # utf8_string
+    'PROV_PARAM_PKCS11_USERPIN' =>         "pkcs11-userpin",      # utf8_string
+    'PROV_PARAM_PKCS11_ENABLE_DIGESTS' =>  "pkcs11-digest",       # uint
+    'PROV_PARAM_PKCS11_SLOTIDX_INFO' =>    "pkcs11-slotidx-info", # uint
+    'PROV_PARAM_PKCS11_SLOT_INFO_VALUE' => "pkcs11-slot-val",     # utf8_ptr
+    'PROV_PARAM_PKCS11_SLOT_INFO_ID' =>    "pkcs11-slot-id",      # uint
+
 # Provider-native object abstractions
 #
 # These are used when a provider wants to pass object data or an object
@@ -246,6 +256,7 @@ my %params = (
     'PKEY_PARAM_PUB_KEY' =>             "pub",
     'PKEY_PARAM_PRIV_KEY' =>            "priv",
     'PKEY_PARAM_IMPLICIT_REJECTION' =>  "implicit-rejection",
+    'PKEY_PARAM_ALIAS' =>               "alias", # utf8 string
 
 # Diffie-Hellman/DSA Parameters
     'PKEY_PARAM_FFC_P' =>               "p",
@@ -491,7 +502,10 @@ my %params = (
     'STORE_PARAM_PROPERTIES' => "properties",   # utf8_string
 # DECODER input type if a decoder is used by the store
     'STORE_PARAM_INPUT_TYPE' => "input-type",   # UTF8_STRING
-
+    'STORE_PARAM_KEY_ALIAS' =>   "key-alias",   # UTF8_STRING
+    'STORE_PARAM_CERT' =>        "cert",        # DER blob => OCTET_STRING/
+    'STORE_PARAM_PUB_KEY' =>     "pub-key",     # DER blob => OCTET_STRING
+    'STORE_PARAM_ID' =>          "id",          # UTF8_STRING
 
 # Libssl record layer
     'LIBSSL_RECORD_LAYER_PARAM_OPTIONS' =>        "options",

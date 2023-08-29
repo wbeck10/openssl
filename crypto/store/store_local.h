@@ -66,8 +66,19 @@ struct ossl_store_search_st {
      * Used by OSSL_STORE_SEARCH_BY_KEY_FINGERPRINT and
      * OSSL_STORE_SEARCH_BY_ALIAS
      */
+
     const unsigned char *string;
     size_t stringlength;
+
+    /*
+     * Used by OSSL_STORE_SEARCH_prv_key
+     */
+    const X509 *cert;
+
+    /*
+     * Used by OSSL_STORE_SEARCH_prv_key_by_pub_key
+     */
+    EVP_PKEY *pubkey;
 };
 
 /*-
@@ -112,6 +123,7 @@ struct ossl_store_loader_st {
     OSSL_FUNC_store_eof_fn *p_eof;
     OSSL_FUNC_store_close_fn *p_close;
     OSSL_FUNC_store_export_object_fn *p_export_object;
+    OSSL_FUNC_store_add_fn *p_add;
 };
 DEFINE_LHASH_OF_EX(OSSL_STORE_LOADER);
 

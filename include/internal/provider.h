@@ -28,9 +28,9 @@ extern "C" {
  */
 
 /* Provider Object finder, constructor and destructor */
-OSSL_PROVIDER *ossl_provider_find(OSSL_LIB_CTX *libctx, const char *name,
-                                  int noconfig);
-OSSL_PROVIDER *ossl_provider_new(OSSL_LIB_CTX *libctx, const char *name,
+OSSL_PROVIDER *ossl_provider_find(OSSL_LIB_CTX *libctx, const char *id,
+                                  const char *libname, int noconfig);
+OSSL_PROVIDER *ossl_provider_new(OSSL_LIB_CTX *libctx, const char *id, const char *libname,
                                  OSSL_provider_init_fn *init_function,
                                  int noconfig);
 int ossl_provider_up_ref(OSSL_PROVIDER *prov);
@@ -87,6 +87,8 @@ int ossl_provider_get_capabilities(const OSSL_PROVIDER *prov,
                                    OSSL_CALLBACK *cb,
                                    void *arg);
 int ossl_provider_self_test(const OSSL_PROVIDER *prov);
+const OSSL_PARAM *ossl_provider_settable_params(const OSSL_PROVIDER *prov);
+int ossl_provider_set_params(OSSL_PROVIDER *prov, const OSSL_PARAM params[]);
 const OSSL_ALGORITHM *ossl_provider_query_operation(const OSSL_PROVIDER *prov,
                                                     int operation_id,
                                                     int *no_cache);
