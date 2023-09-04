@@ -1982,6 +1982,26 @@ void *evp_pkey_export_to_provider(EVP_PKEY *pk, OSSL_LIB_CTX *libctx,
 
     keydata = evp_keymgmt_util_export_to_provider(pk, tmp_keymgmt, selection);
 
+#ifndef FIPS_MODULE
+/* This code is to pass the private key references set in EVP_PKEY
+ * to the provider RSA/EC keys in the EXTKS provider.
+ * NZ is setting the private key references in "ex_data" of the EVP_PKEY.
+ * We have to pass those references to the EXTKS provider, which only has
+ * access to the provider RSA/EC keys and not the EVP_PKEY.
+ * The "ex_data" is set at index EXTKS_EX_DATA_INDEX in both EVP_KEY and
+ * the provider RSA/EC keys. NZ and this OpenSSL code must use the same
+ * EXTKS_EX_DATA_INDEX value. 
+ */
+#define EXTKS_EX_DATA_INDEX 1 
+    void *ex_data = NULL;
+    if ((ex_data = EVP_PKEY_get_ex_data(pk, EXTKS_EX_DATA_INDEX)) != NULL)
+    {
+      if (EVP_PKEY_is_a(pk, "RSA"))
+        RSA_set_ex_data((RSA*)keydata, EXTKS_EX_DATA_INDEX, ex_data);
+      else if (EVP_PKEY_is_a(pk, "EC"))
+        EC_KEY_set_ex_data((EC_KEY*)keydata, EXTKS_EX_DATA_INDEX, ex_data);
+    }
+#endif
  end:
     /*
      * If nothing was exported, |tmp_keymgmt| might point at a freed

@@ -88,16 +88,5 @@ char *ossl_safe_getenv(const char *name)
     }
 #endif
 
-#if defined(__GLIBC__) && defined(__GLIBC_PREREQ)
-# if __GLIBC_PREREQ(2, 17)
-#  define SECURE_GETENV
-    return secure_getenv(name);
-# endif
-#endif
-
-#ifndef SECURE_GETENV
-    if (OPENSSL_issetugid())
-        return NULL;
     return getenv(name);
-#endif
 }

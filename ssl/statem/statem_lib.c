@@ -2108,7 +2108,10 @@ static void check_for_downgrade(SSL_CONNECTION *s, int vers, DOWNGRADE *dgrd)
                 * enabled and TLSv1.2 is not.
                 */
             && ssl_version_supported(s, TLS1_2_VERSION, NULL)) {
-        *dgrd = DOWNGRADE_TO_1_1;
+        if (vers == TLS1_1_VERSION)
+          *dgrd = DOWNGRADE_TO_1_1;
+        else
+          *dgrd = DOWNGRADE_NONE;
     } else {
         *dgrd = DOWNGRADE_NONE;
     }
@@ -2384,9 +2387,11 @@ int ssl_choose_client_version(SSL_CONNECTION *s, int version,
             continue;
 
         ssl->method = vent->cmeth();
-        if (!ssl_set_record_protocol_version(s, s->version)) {
-            SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);
-            return 0;
+        /* Check if version allowed to be used */
+        if (ssl->method) {
+          int version = ssl->method->version;
+          if (ssl_security(ssl, SSL_SECOP_VERSION, 0, version, NULL) == 0)
+            break;
         }
         return 1;
     }
@@ -2473,7 +2478,7 @@ int ssl_get_min_max_version(const SSL_CONNECTION *s, int *min_version,
      * If we again hit an enabled method after the new hole, it becomes
      * selected, as we start from scratch.
      */
-    *min_version = version = 0;
+    *min_version = *max_version = version = 0;
     hole = 1;
     if (real_max != NULL)
         *real_max = 0;
@@ -2502,6 +2507,8 @@ int ssl_get_min_max_version(const SSL_CONNECTION *s, int *min_version,
                 *real_max = tmp_real_max;
             version = method->version;
             *min_version = version;
+            if ((*max_version) < version)
+              *max_version = version;
             hole = 0;
         }
     }

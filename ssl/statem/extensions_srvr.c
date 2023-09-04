@@ -1111,7 +1111,8 @@ int tls_parse_ctos_psk(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,
              */
             memcpy(sess->sid_ctx, s->sid_ctx, s->sid_ctx_length);
             sess->sid_ctx_length = s->sid_ctx_length;
-            ext = 1;
+            if (ticket_agel == 0)
+                ext = 1;
             if (id == 0)
                 s->ext.early_data_ok = 1;
             s->ext.ticket_expected = 1;
