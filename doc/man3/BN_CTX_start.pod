@@ -10,7 +10,7 @@ BN_CTX_start, BN_CTX_start_ex, BN_CTX_get, BN_CTX_end - use temporary BIGNUM var
 
  void BN_CTX_start(BN_CTX *ctx);
 
- void BN_CTX_start_ex(BN_CTX *ctx, unsigned int flags);
+ int BN_CTX_start_ex(BN_CTX *ctx, unsigned int flags);
 
  BIGNUM *BN_CTX_get(BN_CTX *ctx);
 

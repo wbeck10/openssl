@@ -2932,10 +2932,11 @@ static int test_ctx_scrub_on_end_flag(void)
     if (!TEST_ptr(pbn = BN_CTX_get(nctx))
         || !TEST_true(BN_set_word(pbn, bnval)))
         goto err;
+
     BN_CTX_end(nctx);
     bnstartcnt--;
     bignumstr = (struct bignum_st *)pbn;
-    if (memcmp(&bignumstr->d, &bnval, sizeof(BN_ULONG)) == 0)
+    if (memcmp((void *)&bignumstr->d, &bnval, sizeof(BN_ULONG)) == 0)
         goto err;
 
     /* Create a to be scrubed bignum and release it.
@@ -2944,15 +2945,17 @@ static int test_ctx_scrub_on_end_flag(void)
     bnval = 0x22222222UL;
     if (!TEST_true(BN_CTX_start_ex(nctx, BN_CTX_START_FLAG_SCRUB_ON_END)))
         goto err;
+
     bnstartcnt++;
     if (!TEST_ptr(pbn = BN_CTX_get(nctx))
         || !TEST_true(BN_set_word(pbn, bnval)))
         goto err;
+
     BN_CTX_end(nctx);
     bnstartcnt--;
     bignumstr = (struct bignum_st *)pbn;
     bnval = 0x00000000UL;
-    if (memcmp(&bignumstr->d, &bnval, sizeof(BN_ULONG)) == 0)
+    if (memcmp((void *)&bignumstr->d, &bnval, sizeof(BN_ULONG)) == 0)
         goto err;
 
     ok = 1;
