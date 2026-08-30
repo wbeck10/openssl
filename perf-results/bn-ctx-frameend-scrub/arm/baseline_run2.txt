@@ -1,0 +1,39 @@
+Doing 2048 bits private rsa sign ops for 3s: 3153 2048 bits private RSA sign ops in 3.00s
+Doing 2048 bits public rsa verify ops for 3s: 124534 2048 bits public RSA verify ops in 3.00s
+Doing 2048 bits public rsa encrypt ops for 3s: 118320 2048 bits public RSA encrypt ops in 2.99s
+Doing 2048 bits private rsa decrypt ops for 3s: 3132 2048 bits private RSA decrypt ops in 3.00s
+Doing 2048 bits sign dsa ops for 3s: 9142 2048 bits DSA sign ops in 3.00s
+Doing 2048 bits verify dsa ops for 3s: 9933 2048 bits DSA verify ops in 3.00s
+Doing 256 bits sign prime256v1 ops for 3s: 128637 prime256v1 sign ops in 2.97s
+Doing 256 bits verify prime256v1 ops for 3s: 39916 prime256v1 verify ops in 3.00s
+Doing 256 bits  prime256v1 ops for 3s: 51718 prime256v1 ops in 3.00s
+Doing 2048 bits  ffdh ops for 3s: 7638 2048-bits FFDH ops in 3.00s
+Doing rsa2048 keygen ops for 3s: 44 rsa2048 KEM keygen ops in 3.00s
+Doing rsa2048 encaps ops for 3s: 113217 rsa2048 KEM encaps ops in 3.00s
+Doing rsa2048 decaps ops for 3s: 3149 rsa2048 KEM decaps ops in 3.00s
+Doing rsa2048 keygen ops for 3s: 46 rsa2048 signature keygen ops in 3.02s
+Doing rsa2048 signs ops for 3s: 3149 rsa2048 signature sign ops in 3.00s
+Doing rsa2048 verify ops for 3s: 124619 rsa2048 signature verify ops in 3.00s
+Doing dsa2048 keygen ops for 3s: 4123 dsa2048 signature keygen ops in 3.00s
+Doing dsa2048 signs ops for 3s: 6989 dsa2048 signature sign ops in 3.00s
+Doing dsa2048 verify ops for 3s: 9158 dsa2048 signature verify ops in 3.00s
+version: 4.1.0-dev
+built on: Sat Aug 29 19:11:22 2026 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -g -fno-omit-frame-pointer -DOPENSSL_PIC -DNDEBUG
+CPUINFO: OPENSSL_armcap=0x13ffd
+                   sign    verify    encrypt   decrypt   sign/s verify/s  encr./s  decr./s
+rsa  2048 bits 0.000951s 0.000024s 0.000025s 0.000958s   1051.0  41511.3  39571.9   1044.0
+                  sign    verify    sign/s verify/s
+dsa 2048 bits 0.000328s 0.000302s   3047.3   3311.0
+                              sign    verify    sign/s verify/s
+ 256 bits EC (prime256v1)   0.0000s   0.0001s  43312.1  13305.3
+                              op      op/s
+ 256 bits ecdh (prime256v1)   0.0001s  17239.3
+                       op     op/s
+2048 bits ffdh   0.0004s   2546.0
+                               keygen    encaps    decaps keygens/s  encaps/s  decaps/s
+                    rsa2048 0.068182s 0.000026s 0.000953s      14.7   37739.0    1049.7
+                               keygen     signs    verify keygens/s    sign/s  verify/s
+                    rsa2048 0.065652s 0.000953s 0.000024s      15.2    1049.7   41539.7
+                    dsa2048 0.000728s 0.000429s 0.000328s    1374.3    2329.7    3052.7

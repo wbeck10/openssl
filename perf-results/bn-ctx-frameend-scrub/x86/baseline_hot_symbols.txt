@@ -1,0 +1,67 @@
+                          |          |                                 --4.62%--BN_mod_exp_mont_consttime_x2
+                          |                                            --4.61%--BN_mod_exp_mont_consttime_x2
+                          |                                 --4.51%--BN_mod_exp_mont_consttime_x2
+                          |                                            --4.63%--BN_mod_exp_mont_consttime_x2
+                          |          |                                 --4.62%--BN_mod_exp_mont_consttime_x2
+                          |                                            --4.61%--BN_mod_exp_mont_consttime_x2
+                          |                                 --4.51%--BN_mod_exp_mont_consttime_x2
+                          |                                            --4.63%--BN_mod_exp_mont_consttime_x2
+                          |          |                                 --4.62%--BN_mod_exp_mont_consttime_x2
+                          |                                            --4.61%--BN_mod_exp_mont_consttime_x2
+                          |                                 --4.51%--BN_mod_exp_mont_consttime_x2
+                          |                                            --4.63%--BN_mod_exp_mont_consttime_x2
+                       |          |                                 --4.62%--BN_mod_exp_mont_consttime_x2
+                       |                                            --4.61%--BN_mod_exp_mont_consttime_x2
+                       |                                 --4.51%--BN_mod_exp_mont_consttime_x2
+                       |                                            --4.63%--BN_mod_exp_mont_consttime_x2
+            |          |                                 --4.62%--BN_mod_exp_mont_consttime_x2
+            |                                            --4.61%--BN_mod_exp_mont_consttime_x2
+            |                                 --4.51%--BN_mod_exp_mont_consttime_x2
+            |                                            --4.63%--BN_mod_exp_mont_consttime_x2
+                        --18.36%--BN_mod_exp_mont_consttime_x2
+    18.36%     0.00%  [.] BN_mod_exp_mont_consttime_x2                -      -            
+             --18.36%--BN_mod_exp_mont_consttime_x2
+                                  |          BN_mod_exp_mont_consttime_x2
+                                  |          BN_mod_exp_mont_consttime_x2
+                                  |          BN_mod_exp_mont_consttime_x2
+                                             BN_mod_exp_mont_consttime_x2
+                       |                                 --9.25%--BN_mod_exp_mont_consttime_x2
+                       |                                            --0.90%--BN_mod_exp_mont_consttime
+                       |                                                       --0.87%--bn_mod_exp_mont_fixed_top
+                        --9.11%--BN_mod_exp_mont_consttime_x2
+                                   --9.25%--BN_mod_exp_mont_consttime_x2
+                                   --9.25%--BN_mod_exp_mont_consttime_x2
+               |                                 --4.62%--BN_mod_exp_mont_consttime_x2
+                                   --4.61%--BN_mod_exp_mont_consttime_x2
+                                              --4.61%--BN_mod_exp_mont_consttime_x2
+                                      --4.51%--BN_mod_exp_mont_consttime_x2
+                                      --4.51%--BN_mod_exp_mont_consttime_x2
+                                   --4.51%--BN_mod_exp_mont_consttime_x2
+                                                 --4.63%--BN_mod_exp_mont_consttime_x2
+                       |                      --0.68%--BN_mod_exp_mont
+     1.67%     0.00%  [.] BN_mod_exp_mont_consttime                   -      -            
+             --1.58%--bn_mod_exp_mont_fixed_top
+     1.58%     0.10%  [.] bn_mod_exp_mont_fixed_top                   -      -            
+             --1.48%--bn_mod_exp_mont_fixed_top
+                        --0.69%--BN_mod_exp_mont
+     1.49%     0.07%  [.] BN_mod_exp_mont                             -      -            
+             --1.42%--BN_mod_exp_mont
+                                   --0.68%--BN_mod_exp_mont
+                                                         --0.90%--BN_mod_exp_mont_consttime
+                                                                    --0.87%--bn_mod_exp_mont_fixed_top
+                                              --0.90%--BN_mod_exp_mont_consttime
+                                                         --0.87%--bn_mod_exp_mont_fixed_top
+                        --0.68%--BN_mod_exp_mont
+                                   --0.90%--BN_mod_exp_mont_consttime
+                                              --0.87%--bn_mod_exp_mont_fixed_top
+                        --0.90%--BN_mod_exp_mont_consttime
+                                   --0.87%--bn_mod_exp_mont_fixed_top
+     0.56%     0.56%  [.] bn_mul_mont                                 -      -            
+             --0.51%--bn_mul_mont
+     0.38%     0.38%  [.] OPENSSL_cleanse                             -      -            
+     0.30%     0.23%  [.] bn_mul_mont_fixed_top                       -      -            
+     0.24%     0.04%  [.] BN_clear_free                               -      -            
+     0.22%     0.05%  [.] BN_mod_exp2_mont                            -      -            
+     0.06%     0.06%  [.] BN_CTX_end                                  -      -            
+     0.06%     0.05%  [.] BN_CTX_start                                -      -            
+     0.00%     0.00%  [.] BN_clear                                    -      -            

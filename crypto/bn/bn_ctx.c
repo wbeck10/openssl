@@ -357,7 +357,10 @@ static void BN_POOL_release(BN_POOL *p, unsigned int num)
 
     p->used -= num;
     while (num--) {
-        bn_check_top(p->current->vals + offset);
+        BIGNUM *bn = p->current->vals + offset;
+
+        BN_clear(bn);
+        bn_check_top(bn);
         if (offset == 0) {
             offset = BN_CTX_POOL_SIZE - 1;
             p->current = p->current->prev;
