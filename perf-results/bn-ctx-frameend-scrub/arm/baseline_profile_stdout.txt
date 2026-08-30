@@ -1,0 +1,41 @@
+Doing 2048 bits private rsa sign ops for 8s: 8237 2048 bits private RSA sign ops in 8.00s
+Doing 2048 bits public rsa verify ops for 8s: 326061 2048 bits public RSA verify ops in 8.00s
+Doing 2048 bits public rsa encrypt ops for 8s: 309506 2048 bits public RSA encrypt ops in 7.91s
+Doing 2048 bits private rsa decrypt ops for 8s: 8194 2048 bits private RSA decrypt ops in 8.00s
+Doing 2048 bits sign dsa ops for 8s: 23897 2048 bits DSA sign ops in 7.98s
+Doing 2048 bits verify dsa ops for 8s: 26372 2048 bits DSA verify ops in 8.00s
+Doing 256 bits sign prime256v1 ops for 8s: 336890 prime256v1 sign ops in 7.92s
+Doing 256 bits verify prime256v1 ops for 8s: 104330 prime256v1 verify ops in 8.00s
+Doing 256 bits  prime256v1 ops for 8s: 135538 prime256v1 ops in 8.00s
+Doing 2048 bits  ffdh ops for 8s: 20009 2048-bits FFDH ops in 8.00s
+Doing rsa2048 keygen ops for 8s: 121 rsa2048 KEM keygen ops in 8.09s
+Doing rsa2048 encaps ops for 8s: 300466 rsa2048 KEM encaps ops in 7.97s
+Doing rsa2048 decaps ops for 8s: 8219 rsa2048 KEM decaps ops in 8.00s
+Doing rsa2048 keygen ops for 8s: 111 rsa2048 signature keygen ops in 8.02s
+Doing rsa2048 signs ops for 8s: 8249 rsa2048 signature sign ops in 8.00s
+Doing rsa2048 verify ops for 8s: 326156 rsa2048 signature verify ops in 8.00s
+Doing dsa2048 keygen ops for 8s: 10740 dsa2048 signature keygen ops in 8.00s
+Doing dsa2048 signs ops for 8s: 18209 dsa2048 signature sign ops in 7.99s
+Doing dsa2048 verify ops for 8s: 23672 dsa2048 signature verify ops in 8.00s
+version: 4.1.0-dev
+built on: Sat Aug 29 19:11:22 2026 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -g -fno-omit-frame-pointer -DOPENSSL_PIC -DNDEBUG
+CPUINFO: OPENSSL_armcap=0x13ffd
+                   sign    verify    encrypt   decrypt   sign/s verify/s  encr./s  decr./s
+rsa  2048 bits 0.000971s 0.000025s 0.000026s 0.000976s   1029.6  40757.6  39128.4   1024.2
+                  sign    verify    sign/s verify/s
+dsa 2048 bits 0.000334s 0.000303s   2994.6   3296.5
+                              sign    verify    sign/s verify/s
+ 256 bits EC (prime256v1)   0.0000s   0.0001s  42536.6  13041.2
+                              op      op/s
+ 256 bits ecdh (prime256v1)   0.0001s  16942.2
+                       op     op/s
+2048 bits ffdh   0.0004s   2501.1
+                               keygen    encaps    decaps keygens/s  encaps/s  decaps/s
+                    rsa2048 0.066860s 0.000027s 0.000973s      15.0   37699.6    1027.4
+                               keygen     signs    verify keygens/s    sign/s  verify/s
+                    rsa2048 0.072252s 0.000970s 0.000025s      13.8    1031.1   40769.5
+                    dsa2048 0.000745s 0.000439s 0.000338s    1342.5    2279.0    2959.0
+[ perf record: Woken up 117 times to write data ]
+[ perf record: Captured and wrote 29.124 MB /home/ec2-user/results/baseline.perf.data (152490 samples) ]
